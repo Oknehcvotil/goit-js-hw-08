@@ -30,9 +30,18 @@ function populateFormInput() {
 
 function onFormSubmit(e) {
   e.preventDefault();
-
   const savedInput = localStorage.getItem(STORAGE_FEEDBACK_FORM);
-  const parsedSavedInput = JSON.parse(savedInput);
+  let parsedSavedInput = {};
+
+  if (savedInput) {
+    parsedSavedInput = JSON.parse(savedInput);
+  }
+
+  if (!parsedSavedInput.message || !parsedSavedInput.email) {
+    alert('Fill all fields');
+    return;
+  }
+
   console.log(parsedSavedInput);
 
   e.currentTarget.reset();
